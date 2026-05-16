@@ -33,7 +33,7 @@ export default function ProductCard() {
         
         <View style={styles.brandRow}>
           <View style={styles.logoCircle}>
-            <Text style={styles.logoM}>M</Text>
+            <Text style={styles.logoM}>B</Text>
           </View>
           <Text style={styles.brandName}>{item.brand}</Text>
         </View>
