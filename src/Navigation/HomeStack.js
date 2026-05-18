@@ -2,16 +2,18 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Home, Heart, Store, User } from "lucide-react-native";
+import { Home, Heart, Store, User, MessageCircle } from "lucide-react-native";
 
 import HomeScreen from "../screens/home/HomeScreen";
 import OrdersScreen from "../screens/products/OrdersScreen";
 import FavoritesScreen from "../screens/home/FavoritesScreen";
 import ProfileScreen from "../screens/home/ProfileScreen";
 import ProductDetailsScreen from "../screens/products/Productdetails";
-
+import ChatListScreen from "../screens/chat/ChatListScreen";
+import ChatRoomScreen from "../screens/chat/ChatRoomScreen";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+import ChatNavigator from "./ChatNavigator";
 
 const CustomTabIcon = ({ focused, Icon }) => {
   return (
@@ -41,11 +43,18 @@ function TabNavigator() {
           tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} Icon={Home} />,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Favorites"
         component={FavoritesScreen}
         options={{
           tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} Icon={Heart} />,
+        }}
+      /> */}
+      <Tab.Screen
+        name="Chats"
+        component={ChatNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} Icon={MessageCircle} />,
         }}
       />
       <Tab.Screen
@@ -71,12 +80,13 @@ export default function HomeStack() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MainTabs" component={TabNavigator} />
       <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
+       <Stack.Screen name="ChatRoom" component={ChatRoomScreen} /> 
     </Stack.Navigator>
   );
 }
 const styles = StyleSheet.create({
   tabBar: {
-    marginHorizontal:15,
+    marginHorizontal: 15,
     position: "absolute",
     bottom: 30,
     alignSelf: "center",
@@ -98,13 +108,13 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   activeContainer: {
-  width: 60,
-  height: 60,
-  borderRadius: 30,
-  backgroundColor: "#fff",
-  justifyContent: "center",
-  alignItems: "center",
-  marginTop: -25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -25,
   },
 
   inactiveContainer: {
