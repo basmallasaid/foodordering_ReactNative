@@ -7,7 +7,7 @@ import { db } from "../config/firebase";
 export const getProducts = async () => {
   try {
     const snap = await getDocs(collection(db, "products"));
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    return snap.docs.map((d) => ({...d.data(),id: d.id }));
   } catch (error) {
     console.log("Error getting products:", error);
     return [];
@@ -18,7 +18,7 @@ export const getProducts = async () => {
 export const getProduct = async (id) => {
   try {
     const snap = await getDoc(doc(db, "products", id));
-    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+    return snap.exists() ? {...snap.data(),id: snap.id } : null;
   } catch (error) {
     console.log("Error getting product:", error);
     return null;
